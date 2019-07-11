@@ -17,21 +17,22 @@ def main():
         print("failed to install caddyserver")
         return
 
+    app_dir = "/www/flask_app_manager"
     
     # 拉取代码
     os.system("yum -y install git")
-    os.system("git clone https://github.com/hechenggang/flask_app_manager.git /www")
+    os.system("git clone https://github.com/hechenggang/flask_app_manager.git {}".format(app_dir))
 
-    app_dir = "/www/flask_app_manager"
-    
+    # 创建虚拟环境
     venv_path = os.path.join(app_dir, "venv")
     os.makedirs(venv_path)
     os.system("python3.7 -m venv {}".format(venv_path))
-
     os.system("{} install -r {} -i https://pypi.tuna.tsinghua.edu.cn/simple/".format(
             os.path.join(app_dir, "venv", "bin", "pip3.7"), 
             os.path.join(app_dir, "requirements.txt")
         ))
+    
+    print("finish")
 
 if __name__ == "__main__":
     main()
