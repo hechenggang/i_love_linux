@@ -6,8 +6,6 @@ def main():
     if not os.path.isdir("/www"):
         os.makedirs("/www")
 
-    os.system("cd /www")
-
     # 检查 caddy 是否已经被安装
     if not os.path.isfile("/usr/local/bin/caddy"):
         # 若没有，则执行安装脚本
@@ -18,12 +16,14 @@ def main():
         # 终止
         print("failed to install caddyserver")
         return
+
     
     # 拉取代码
     os.system("yum -y install git")
-    os.system("git clone https://github.com/hechenggang/flask_app_manager.git")
+    os.system("git clone https://github.com/hechenggang/flask_app_manager.git /www")
 
     app_dir = "/www/flask_app_manager"
+    
     venv_path = os.path.join(app_dir, "venv")
     os.makedirs(venv_path)
     os.system("python3.7 -m venv {}".format(venv_path))
