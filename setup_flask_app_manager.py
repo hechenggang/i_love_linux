@@ -75,18 +75,23 @@ def uninstall():
     print("finish")
 
 def main():
+    try: 
+        get_answer = raw_input
+    except NameError: 
+        get_answer = input
     print("1 INSTALL")
     print("2 UNINSTALL")
-    a = int(input("INPUT NUMBER OF CHOOSE: "))
+    a = int(get_answer("INPUT NUMBER OF CHOOSE: "))
     print(a)
     if a == 1:
-        c = str(input("DO YOU WANT TO INSTALL ? (Y/N)"))
+        c = str(get_answer("DO YOU WANT TO INSTALL ? (Y/N)"))
         if c == "Y":
             install()
         else:
             print("CANCELED")
     elif a == 2:
-        c = str(input("DO YOU WANT TO UNINSTALL ? (Y/N)"))
+        
+        c = str(get_answer("DO YOU WANT TO UNINSTALL ? (Y/N)"))
         if c == "Y":
             uninstall()
         else:
