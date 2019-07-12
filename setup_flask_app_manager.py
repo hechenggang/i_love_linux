@@ -44,16 +44,13 @@ def install():
             os.path.join(app_dir, "requirements.txt")
         ))
     
-    # 创建 caddy 进程，两个（一个为主程序服务，一个为平台上的应用程序服务）
+    # 创建 caddy 进程
     # 创建 flask_app_manager 进程
-    os.system("cp {}/config_file/daemon/caddy/caddy_for_app.service /etc/systemd/system/caddy_for_app.service".format(app_dir))
-    os.system("cp {}/config_file/daemon/caddy/caddy_for_flask_app_manager.service /etc/systemd/system/caddy_for_flask_app_manager.service".format(app_dir))
     os.system("cp {}/config_file/daemon/flask_app_manager/flask_app_manager.service /etc/systemd/system/flask_app_manager.service".format(app_dir))
+    os.system("cp {}/config_file/daemon/caddy/caddy.service /etc/systemd/system/caddy.service".format(app_dir))
     os.system("systemctl daemon-reload")
     os.system("systemctl start flask_app_manager && systemctl enable flask_app_manager")
-    os.system("systemctl start caddy_for_flask_app_manager && systemctl enable caddy_for_flask_app_manager")
-    os.system("systemctl start caddy_for_app && systemctl enable caddy_for_app")
-    
+    os.system("systemctl start caddy && systemctl enable caddy")
 
     print("finish")
 
@@ -63,10 +60,9 @@ def uninstall():
     os.system("rm -rf {}".format(app_dir))
     if not os.path.isdir(app_dir):
         os.makedirs(app_dir)
-    d1 = "/etc/systemd/system/caddy_for_app.service"
-    d2 = "/etc/systemd/system/caddy_for_flask_app_manager.service"
-    d3 = "/etc/systemd/system/flask_app_manager.service"
-    for i in [d1,d2,d3]:
+    d1 = "/etc/systemd/system/caddy.service"
+    d2 = "/etc/systemd/system/flask_app_manager.service"
+    for i in [d1,d2]:
         if os.path.isfile(i):
             name = os.path.split(i)[1].replace(".service","")
             os.system("systemctl stop {} && systemctl disable {}".format(name,name))
