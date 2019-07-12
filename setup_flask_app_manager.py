@@ -68,9 +68,9 @@ def uninstall():
     d3 = "/etc/systemd/system/flask_app_manager.service"
     for i in [d1,d2,d3]:
         if os.path.isfile(i):
-            os.system("rm -rf {}".format(i))
             name = os.path.split(i)[1].replace(".service","")
-            os.system("systemctl start {} && systemctl enable {}".format(name,name))
+            os.system("systemctl stop {} && systemctl disable {}".format(name,name))
+            os.system("rm -rf {}".format(i))
 
     print("finish")
 
