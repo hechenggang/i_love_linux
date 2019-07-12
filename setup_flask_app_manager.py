@@ -80,13 +80,13 @@ def main():
     a = int(input("INPUT NUMBER OF CHOOSE: "))
     print(a)
     if a == 1:
-        c = input("DO YOU WANT TO INSTALL ? (Y/N)")
+        c = str(input("DO YOU WANT TO INSTALL ? (Y/N)"))
         if c == "Y":
             install()
         else:
             print("CANCELED")
     elif a == 2:
-        c = input("DO YOU WANT TO UNINSTALL ? (Y/N)")
+        c = str(input("DO YOU WANT TO UNINSTALL ? (Y/N)"))
         if c == "Y":
             uninstall()
         else:
