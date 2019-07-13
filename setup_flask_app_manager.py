@@ -20,7 +20,7 @@ def install():
     # 检查 python3.7 是否已经被安装
     if not os.path.isfile("/usr/bin/python3.7"):
         # 若没有，则执行安装脚本
-        os.system("curl https://raw.githubusercontent.com/hechenggang/i_love_linux/master/install-python.sh | bash install-python.sh")
+        os.system("wget https://raw.githubusercontent.com/hechenggang/i_love_linux/master/install-python.sh && bash install-python.sh")
     
     # 再次检查
     if not os.path.isfile("/usr/bin/python3.7"):
